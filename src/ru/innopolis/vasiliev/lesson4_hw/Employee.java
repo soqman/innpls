@@ -38,6 +38,9 @@ public class Employee implements Serializable{
     }
 
     public Employee(String name, int age, float salary, Job job) {
+        if(name.equals("")||name==null){
+            throw new NullPointerException();
+        }
         this.name = name.substring(0,1).toUpperCase()+name.substring(1).toLowerCase();
         this.age = age;
         this.salary = salary;
@@ -45,6 +48,9 @@ public class Employee implements Serializable{
     }
 
     public Employee(String name) {
+        if(name.equals("")||name==null){
+            throw new NullPointerException();
+        }
         this.name = name.substring(0,1).toUpperCase()+name.substring(1).toLowerCase();
         this.age = 0;
         this.salary = 0;
@@ -66,6 +72,6 @@ public class Employee implements Serializable{
 
     @Override
     public String toString() {
-        return "Employee: name "+getName()+", Job "+getJob();
+        return "Employee: name "+getName()+", age "+getAge()+", Job "+getJob()+", salary "+getSalary();
     }
 }

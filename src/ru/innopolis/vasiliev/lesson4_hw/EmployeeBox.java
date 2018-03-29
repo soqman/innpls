@@ -1,17 +1,19 @@
 package ru.innopolis.vasiliev.lesson4_hw;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
-public class EmployeeBox implements IEmployeeBox, Serializable{
+public class EmployeeBox implements IEmployeeBox, Externalizable{
 
     static final long SerialVersionUID = 123123123L;
 
-    HashSet<Employee> employees;
-
+    private HashSet<Employee> employees;
+    public HashSet<Employee> getEmployees() {
+        return employees;
+    }
     public EmployeeBox(ArrayList<Employee> employees) {
         try {
             this.employees.addAll(employees);
@@ -95,11 +97,28 @@ public class EmployeeBox implements IEmployeeBox, Serializable{
 
     @Override
     public int hashCode() {
-        return Objects.hash(employees);
+        return Objects.hashCode(employees);
     }
 
     @Override
     public String toString() {
         return "EmployeesBox: size "+employees.size();
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeObject(employees);
+        int sum=0;
+        for(Employee employee:employees){
+            sum+=employee.getSalary();
+        }
+        out.writeInt(sum);
+    }
+
+    @Override
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        employees = (HashSet<Employee>) in.readObject();
+        System.out.println("Saved salary sum is:" +in.readInt());
+
     }
 }

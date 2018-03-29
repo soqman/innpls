@@ -2,7 +2,7 @@ package ru.innopolis.vasiliev.lesson3_hw;
 
 import java.util.HashMap;
 
-public class Main {
+class Main {
 
     public static void main(String[] args) {
         MathBox mathBox;

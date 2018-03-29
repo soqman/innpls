@@ -3,7 +3,7 @@ package ru.innopolis.vasiliev.lesson3_hw;
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class MathBox<T extends Number> {
+class MathBox<T extends Number> {
 
     private HashSet<T> nums=new HashSet<>();
 

@@ -5,7 +5,7 @@ import java.util.HashSet;
 
 public class MathBox<T extends Number> {
 
-    private ArrayList<T> nums=new ArrayList<>();
+    private HashSet<T> nums=new HashSet<>();
 
     //В чем смысл использования дженериков в данном случае?
     // Я, кажется, чего то не понял. Почему нельзя хранить просто коллекцию Numbers?
@@ -50,8 +50,9 @@ public class MathBox<T extends Number> {
         if(divider.doubleValue()==0){
             throw new ArithmeticException("Divide by zero");
         }
-        for(int i=0;i<nums.size();i++){
-            nums.set(i,(T)new Double(nums.get(i).doubleValue()/divider.doubleValue()));
+        for(Number num:nums){
+            nums.remove(num);
+            nums.add((T)new Double(num.doubleValue()/divider.doubleValue()));
         }
     }
 }

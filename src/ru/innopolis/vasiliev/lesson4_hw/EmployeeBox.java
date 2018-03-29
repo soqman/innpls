@@ -2,6 +2,7 @@ package ru.innopolis.vasiliev.lesson4_hw;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,18 +10,18 @@ public class EmployeeBox implements IEmployeeBox, Serializable{
 
     static final long SerialVersionUID = 123123123L;
 
-    ArrayList<Employee> employees;
+    HashSet<Employee> employees;
 
     public EmployeeBox(ArrayList<Employee> employees) {
         try {
-            this.employees = employees;
+            this.employees.addAll(employees);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
     }
 
     public EmployeeBox() {
-        this.employees=new ArrayList<Employee>();
+        this.employees=new HashSet<>();
     }
 
     @Override
@@ -63,7 +64,8 @@ public class EmployeeBox implements IEmployeeBox, Serializable{
     @Override
     public boolean saveOrUpdate(Employee employee) {
         if(employees.contains(employee)){
-            employees.set(employees.indexOf(employee),employee);
+            employees.remove(employee);
+            employees.add(employee);
             return true;
         }
         else{

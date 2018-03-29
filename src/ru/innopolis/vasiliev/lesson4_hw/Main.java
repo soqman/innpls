@@ -7,8 +7,10 @@ import java.nio.file.Paths;
 public class Main {
     public static void main(String[] args) {
         Employee employee =new Employee("Pavel",25,25000,Job.BOSS);
+        Employee employeeAlt =new Employee("Pavel",1,10000,Job.CLEANER);
         Employee employee2= new Employee("ROMAN");
         Employee employee3= new Employee("Dmitriy");
+        Employee employee4= new Employee("Viktor");
 
         EmployeeBox employeeBox= new EmployeeBox();
         EmployeeBox employeeBox2= new EmployeeBox();
@@ -16,6 +18,10 @@ public class Main {
         employeeBox.save(employee);
         employeeBox.save(employee2);
         employeeBox.save(employee3);
+
+        //System.out.println(employeeBox);
+        //employeeBox.saveOrUpdate(employee4);
+        //System.out.println(employeeBox);
 
         //System.out.println("Equals EBox - "+employeeBox.equals(LoadEmployeeBox(Paths.get("1"))));
         //System.out.println(employee.hashCode());
@@ -25,7 +31,7 @@ public class Main {
         //System.out.println(employeeBox.employees.get(0));
         //System.out.println(employeeBox.getByJob(Job.NONE));
 
-        System.out.println(SaveEmployeeBox(employeeBox,Paths.get("1")));
+       // System.out.println(SaveEmployeeBox(employeeBox,Paths.get("1")));
     }
 
     static boolean SaveEmployeeBox(EmployeeBox employeeBox, Path path){

@@ -3,7 +3,7 @@ package ru.innopolis.vasiliev.lesson4_hw;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Employee implements Serializable{
+public class Employee implements Serializable {
     private final String name;
     private int age;
     private float salary;
@@ -38,20 +38,20 @@ public class Employee implements Serializable{
     }
 
     public Employee(String name, int age, float salary, Job job) {
-        if(name.equals("")||name==null){
+        if (name.equals("") || name == null) {
             throw new NullPointerException();
         }
-        this.name = name.substring(0,1).toUpperCase()+name.substring(1).toLowerCase();
+        this.name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
         this.age = age;
         this.salary = salary;
         this.job = job;
     }
 
     public Employee(String name) {
-        if(name.equals("")||name==null){
+        if (name.equals("") || name == null) {
             throw new NullPointerException();
         }
-        this.name = name.substring(0,1).toUpperCase()+name.substring(1).toLowerCase();
+        this.name = name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
         this.age = 0;
         this.salary = 0;
         this.job = Job.NONE;
@@ -72,6 +72,6 @@ public class Employee implements Serializable{
 
     @Override
     public String toString() {
-        return "Employee: name "+getName()+", age "+getAge()+", Job "+getJob()+", salary "+getSalary();
+        return "Employee: name " + getName() + ", age " + getAge() + ", Job " + getJob() + ", salary " + getSalary();
     }
 }

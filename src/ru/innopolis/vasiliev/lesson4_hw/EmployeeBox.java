@@ -6,14 +6,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
-public class EmployeeBox implements IEmployeeBox, Externalizable{
+public class EmployeeBox implements IEmployeeBox, Externalizable {
 
     static final long SerialVersionUID = 123123123L;
 
     private HashSet<Employee> employees;
+
     public HashSet<Employee> getEmployees() {
         return employees;
     }
+
     public EmployeeBox(ArrayList<Employee> employees) {
         try {
             this.employees.addAll(employees);
@@ -23,12 +25,12 @@ public class EmployeeBox implements IEmployeeBox, Externalizable{
     }
 
     public EmployeeBox() {
-        this.employees=new HashSet<>();
+        this.employees = new HashSet<>();
     }
 
     @Override
-    public boolean save(Employee employee){
-        if(employee==null){
+    public boolean save(Employee employee) {
+        if (employee == null) {
             return false;
         }
         return employees.add(employee);
@@ -41,8 +43,8 @@ public class EmployeeBox implements IEmployeeBox, Externalizable{
 
     @Override
     public Employee getByName(String name) {
-        for(Employee employee:employees){
-            if(employee.getName().equals(name)){
+        for (Employee employee : employees) {
+            if (employee.getName().equals(name)) {
                 return employee;
             }
         }
@@ -51,13 +53,13 @@ public class EmployeeBox implements IEmployeeBox, Externalizable{
 
     @Override
     public List<Employee> getByJob(Job job) {
-        ArrayList<Employee> arrayList=new ArrayList<>();
-        for(Employee employee:employees){
-            if(employee.getJob()==job){
+        ArrayList<Employee> arrayList = new ArrayList<>();
+        for (Employee employee : employees) {
+            if (employee.getJob() == job) {
                 arrayList.add(employee);
             }
         }
-        if(arrayList.size()!=0){
+        if (arrayList.size() != 0) {
             return arrayList;
         }
         return null;
@@ -65,12 +67,11 @@ public class EmployeeBox implements IEmployeeBox, Externalizable{
 
     @Override
     public boolean saveOrUpdate(Employee employee) {
-        if(employees.contains(employee)){
+        if (employees.contains(employee)) {
             employees.remove(employee);
             employees.add(employee);
             return true;
-        }
-        else{
+        } else {
             employees.add(employee);
             return false;
         }
@@ -78,8 +79,8 @@ public class EmployeeBox implements IEmployeeBox, Externalizable{
 
     @Override
     public boolean changeAllWork(Job target, Job src) {
-        for(Employee employee:employees){
-            if(employee.getJob()==target){
+        for (Employee employee : employees) {
+            if (employee.getJob() == target) {
                 employee.setJob(src);
             }
         }
@@ -102,15 +103,15 @@ public class EmployeeBox implements IEmployeeBox, Externalizable{
 
     @Override
     public String toString() {
-        return "EmployeesBox: size "+employees.size();
+        return "EmployeesBox: size " + employees.size();
     }
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {
         out.writeObject(employees);
-        int sum=0;
-        for(Employee employee:employees){
-            sum+=employee.getSalary();
+        int sum = 0;
+        for (Employee employee : employees) {
+            sum += employee.getSalary();
         }
         out.writeInt(sum);
     }
@@ -118,7 +119,7 @@ public class EmployeeBox implements IEmployeeBox, Externalizable{
     @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         employees = (HashSet<Employee>) in.readObject();
-        System.out.println("Saved salary sum is:" +in.readInt());
+        System.out.println("Saved salary sum is:" + in.readInt());
 
     }
 }

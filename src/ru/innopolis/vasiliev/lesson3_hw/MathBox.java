@@ -5,18 +5,16 @@ import java.util.HashSet;
 
 class MathBox<T extends Number> {
 
-    private HashSet<T> nums=new HashSet<>();
+    private HashSet<T> nums = new HashSet<>();
 
     //В чем смысл использования дженериков в данном случае?
     // Я, кажется, чего то не понял. Почему нельзя хранить просто коллекцию Numbers?
 
     public MathBox(T[] nums) throws NotUniqueValuesException {
-        for(int i=0;i<nums.length;i++)
-        {
+        for (int i = 0; i < nums.length; i++) {
             if (!this.nums.contains(nums[i])) {
                 this.nums.add(nums[i]);
-            }
-            else{
+            } else {
                 throw new NotUniqueValuesException(i);
             }
         }
@@ -38,34 +36,35 @@ class MathBox<T extends Number> {
         return nums.hashCode();
     }
 
-    public double summator(){
-        double sum=0;
-        for(T num:nums){
-            sum+=num.doubleValue();
+    public double summator() {
+        double sum = 0;
+        for (T num : nums) {
+            sum += num.doubleValue();
         }
         return sum;
     }
 
-    public void splitter(Number divider){
-        if(divider.doubleValue()==0){
+    public void splitter(Number divider) {
+        if (divider.doubleValue() == 0) {
             throw new ArithmeticException("Divide by zero");
         }
-        for(Number num:nums){
+        for (Number num : nums) {
             nums.remove(num);
-            nums.add((T)new Double(num.doubleValue()/divider.doubleValue()));
+            nums.add((T) new Double(num.doubleValue() / divider.doubleValue()));
         }
     }
 }
 
-class NotUniqueValuesException extends Exception{
+class NotUniqueValuesException extends Exception {
     private int i;
+
     public NotUniqueValuesException(int i) {
-        this.i=i;
+        this.i = i;
     }
 
     @Override
     public String getMessage() {
-        return "Значение в "+i+" элементе не является уникальным в данном массиве";
+        return "Значение в " + i + " элементе не является уникальным в данном массиве";
     }
 }
 

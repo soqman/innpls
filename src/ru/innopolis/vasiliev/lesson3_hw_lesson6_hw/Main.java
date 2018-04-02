@@ -1,24 +1,17 @@
-package ru.innopolis.vasiliev.lesson3_hw;
+package ru.innopolis.vasiliev.lesson3_hw_lesson6_hw;
 
-import java.util.HashMap;
+import java.lang.reflect.Proxy;
 
 class Main {
 
     public static void main(String[] args) {
-        MathBox mathBox;
-        MathBox mathBox2;
+        IMathBox mathBox;
         Number[] nums = {1, 2.9F, 3L, 4.9, 53f, 6, 5, 7, 8, 54};
-        Number[] nums2 = {2, 44.124F, 343L, 4.93, 53d, 0, -232, -0.33, -2, 22, 3, 4, 1};
         try {
             mathBox = new MathBox(nums);
-            //mathBox2=new MathBox(nums2);
-
-            //System.out.println(mathBox.summator());
-
-            mathBox.splitter(1.2);
-            mathBox2 = mathBox;
-
-            checkHashCodeAndEquals(mathBox, mathBox2);
+            IMathBox mathBoxProxy = (IMathBox) Proxy.newProxyInstance(MathBoxInvocationHandler.class.getClassLoader(),
+                    new Class[]{IMathBox.class}, new MathBoxInvocationHandler(mathBox));
+            mathBoxProxy.summator();
         } catch (NotUniqueValuesException e) {
             e.printStackTrace();
         }

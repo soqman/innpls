@@ -1,6 +1,6 @@
-package ru.innopolis.vasiliev.lesson6_hw;
+package ru.innopolis.vasiliev.lesson6;
 
-public class Pupil {
+public class Student {
     private int age;
     public String name;
     private boolean alive;

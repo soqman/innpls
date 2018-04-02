@@ -31,6 +31,8 @@ class Main {
         if (seconds.getSeconds() == SECONDS_TO_STOP) {
             chronometer.stopCounting();
             sevenSecondsThread.interrupt();
+            fiveSecondsThread.interrupt();
+            //каким образом завершить исполнение?
         }
     }
 }

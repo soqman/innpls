@@ -14,7 +14,7 @@ class SevenSecondsThread extends Thread {
                 try {
                     seconds.wait();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    System.out.println(this.getName()+" is interrupted");
                 }
                 if (seconds.getSeconds() % 7 == 0) {
                     System.out.println("7 seconds passed. By " + Thread.currentThread().getName());

@@ -1,14 +1,14 @@
-package ru.innopolis.vasiliev.lesson6_hw;
+package ru.innopolis.vasiliev.lesson6;
 
 import java.lang.reflect.Field;
 
 public class Main {
     public static void main(String[] args){
-        Pupil pupil = new Pupil();
-        pupil.setAge(10);
-        pupil.setName("MISHA");
-        System.out.println(pupil.toString());
-        Class<Pupil> clazz = (Class<Pupil>) pupil.getClass();
+        Student student = new Student();
+        student.setAge(10);
+        student.setName("MISHA");
+        System.out.println(student.toString());
+        Class<Student> clazz = (Class<Student>) student.getClass();
         try {
             Object newPupul = clazz.newInstance();
             try {

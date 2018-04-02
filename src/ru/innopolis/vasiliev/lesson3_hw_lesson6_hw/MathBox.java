@@ -1,14 +1,10 @@
-package ru.innopolis.vasiliev.lesson3_hw;
+package ru.innopolis.vasiliev.lesson3_hw_lesson6_hw;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-
-class MathBox<T extends Number> {
+@Logged
+class MathBox<T extends Number> implements IMathBox{
 
     private HashSet<T> nums = new HashSet<>();
-
-    //В чем смысл использования дженериков в данном случае?
-    // Я, кажется, чего то не понял. Почему нельзя хранить просто коллекцию Numbers?
 
     public MathBox(T[] nums) throws NotUniqueValuesException {
         for (int i = 0; i < nums.length; i++) {

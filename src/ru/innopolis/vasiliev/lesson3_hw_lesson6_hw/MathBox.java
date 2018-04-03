@@ -1,8 +1,9 @@
 package ru.innopolis.vasiliev.lesson3_hw_lesson6_hw;
 
 import java.util.HashSet;
-@Logged
-class MathBox<T extends Number> implements IMathBox{
+import java.util.Iterator;
+
+class MathBox<T extends Number> implements IMathBox {
 
     private HashSet<T> nums = new HashSet<>();
 
@@ -31,7 +32,8 @@ class MathBox<T extends Number> implements IMathBox{
         //Для использования в качестве ключа придется перед изменением поля каждый раз удалять бакет и добавлять заново измененный.
         return nums.hashCode();
     }
-
+    @Override
+    @ClearData
     public double summator() {
         double sum = 0;
         for (T num : nums) {
@@ -39,15 +41,17 @@ class MathBox<T extends Number> implements IMathBox{
         }
         return sum;
     }
-
+    @Override
+    @ClearData
     public void splitter(Number divider) {
         if (divider.doubleValue() == 0) {
             throw new ArithmeticException("Divide by zero");
         }
-        for (Number num : nums) {
-            nums.remove(num);
-            nums.add((T) new Double(num.doubleValue() / divider.doubleValue()));
+        for (Iterator<T> it = nums.iterator(); it.hasNext(); ) {
+            T t=it.next();
+            t=(T) new Double(t.doubleValue() / divider.doubleValue());
         }
+
     }
 }
 

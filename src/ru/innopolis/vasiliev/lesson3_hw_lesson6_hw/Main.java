@@ -9,9 +9,11 @@ class Main {
         Number[] nums = {1, 2.9F, 3L, 4.9, 53f, 6, 5, 7, 8, 54};
         try {
             mathBox = new MathBox(nums);
-            IMathBox mathBoxProxy = (IMathBox) Proxy.newProxyInstance(MathBoxInvocationHandler.class.getClassLoader(),
-                    new Class[]{IMathBox.class}, new MathBoxInvocationHandler(mathBox));
-            mathBoxProxy.summator();
+            IMathBox mathBoxProxy = (IMathBox) Proxy.newProxyInstance(MathBoxProxy.class.getClassLoader(),
+                    new Class[]{IMathBox.class}, new MathBoxProxy(mathBox));
+            System.out.println(mathBoxProxy.summator());
+            System.out.println(mathBox.summator());
+
         } catch (NotUniqueValuesException e) {
             e.printStackTrace();
         }
@@ -22,5 +24,4 @@ class Main {
         System.out.println("m2:" + m2.hashCode());
         System.out.println(m1.equals(m2));
     }
-
 }

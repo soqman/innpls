@@ -10,7 +10,7 @@ class ResGenerator {
     static int resSize;
     static final String SOURCES_FILEPREFIX="file_";
     static final String SOURCES_FILEEXT=".txt";
-    static final String OUTPUT_PATH="D://resources/";
+    static final String OUTPUT_PATH="F://J//res/";
 
     public static void main(String[] args) {
         initArgs();
@@ -18,7 +18,7 @@ class ResGenerator {
     }
 
     private static void initArgs() {
-        resSize = 100;
+        resSize = 1_000_000;
         resCount = 100;
     }
 
@@ -62,7 +62,8 @@ class ResGenerator {
                         bw.write(word + endSymbol);
                     } else {
                         if (random.nextInt(10) == 0) {
-                            bw.write(word + endSymbol);
+                            bw.write(word + endSymbol+" ");
+                            size--;
                             toUpper = true;
                         } else {
                             bw.write(word + " ");

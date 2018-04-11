@@ -1,15 +1,16 @@
-package ru.innopolis.vasiliev.lesson7_hw.generator;
+package ru.innopolis.vasiliev.lesson7_hw;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Random;
 
-public class Main {
+class ResGenerator {
     static int resCount;
     static int resSize;
-    static String referenceFilePath;
-    static String outputFolderPath;
+    static final String SOURCES_FILEPREFIX="file_";
+    static final String SOURCES_FILEEXT=".txt";
+    static final String OUTPUT_PATH="D://resources/";
 
     public static void main(String[] args) {
         initArgs();
@@ -17,10 +18,8 @@ public class Main {
     }
 
     private static void initArgs() {
-        referenceFilePath = "D://reference.txt";
-        resSize = 102400;
-        resCount = 1024;
-        outputFolderPath = "D://resources/";
+        resSize = 100;
+        resCount = 100;
     }
 
     private static void generateFiles() {
@@ -33,12 +32,12 @@ public class Main {
             System.out.println("resCount is lower than 1");
             return;
         }
-        if (!Files.exists(Paths.get(outputFolderPath))) {
+        if (!Files.exists(Paths.get(OUTPUT_PATH))) {
             System.out.println("path is not exist");
             return;
         }
         for (int i = 0; i < resCount; i++) {
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(outputFolderPath + "/file_" + i + ".txt"))) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(OUTPUT_PATH + SOURCES_FILEPREFIX + i + SOURCES_FILEEXT))) {
                 int size = resSize;
                 char endSymbol = '.';
                 boolean toUpper = true;

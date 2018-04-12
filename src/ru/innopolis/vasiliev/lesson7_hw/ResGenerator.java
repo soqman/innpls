@@ -10,7 +10,7 @@ class ResGenerator {
     static int resSize;
     static final String SOURCES_FILEPREFIX="file_";
     static final String SOURCES_FILEEXT=".txt";
-    static final String OUTPUT_PATH="F://J//res/";
+    static final String OUTPUT_PATH="D://resources/";
 
     public static void main(String[] args) {
         initArgs();
@@ -18,7 +18,7 @@ class ResGenerator {
     }
 
     private static void initArgs() {
-        resSize = 1_000_000;
+        resSize = 10_485_760;
         resCount = 100;
     }
 

@@ -3,7 +3,7 @@ package ru.innopolis.vasiliev.lesson7_hw;
 import java.io.File;
 
 public class WordsSearcherHelper {
-    private static String[] words = {"sdsdsd", "sdssd", "ewrwe", "erer"};
+    private static String[] words = {"sdsdsd", "sdssd", "ewrwe", "erer","sdfwegwg","f4334gf4g","Fdbre","dglhfm","fehhh","m,nmnpmrt","bkdlkgnmlke","gadg.fg","FKJKLFSLFDKJ","#F3fef;l"};
 
     public static void main(String[] args) {
         WordsSearcher wordsSearcher = new WordsSearcher();

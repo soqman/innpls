@@ -7,22 +7,12 @@ class SearchRunnable implements Runnable {
 
     private final String src;
     private final String[] words;
-    private final String resultPath;
     private final String name;
-    /*private final long startByteIndex;
-    private final long endByteIndex;*/
 
-    SearchRunnable(String src, String[] words, String resultPath, String name, long startByteIndex, long endByteIndex) {
+    SearchRunnable(String src, String[] words,String name) {
         this.src = src;
         this.words = words;
-        this.resultPath = resultPath;
         this.name = name;
-/*        this.startByteIndex = startByteIndex;
-        this.endByteIndex = endByteIndex;*/
-    }
-
-    SearchRunnable(String src, String[] words, String resultPath, String name) {
-        this(src, words, resultPath, name, 0, 1);
     }
 
     @Override
@@ -57,7 +47,7 @@ class SearchRunnable implements Runnable {
     }
 
     private void searchFTP(){
-
+        //пара пара пам! фшть!
     }
 
     private void searchWithBufferedReader() {
@@ -88,7 +78,7 @@ class SearchRunnable implements Runnable {
                 ) {
             if (isWordInSentence(sentence, word)) {
                 System.out.println("word \"" +word+"\" found!");
-                ResultSaver.saveSentence(sentence, resultPath);
+                ResultSaver.getInstance().saveSentence(sentence);
             }
         }
     }

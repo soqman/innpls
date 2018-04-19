@@ -18,8 +18,9 @@ class WordsSearcher {
         long startTime=System.currentTimeMillis();
         ExecutorService executorService = Executors.newFixedThreadPool(10);
         deletePreviousResult(res);
+        ResultSaver resultSaver = new ResultSaver(res);
         for (String source : sources) {
-            executorService.submit(new SearchRunnable(source, words, res, "runnable-" + i++));
+            executorService.submit(new SearchRunnable(source, words, "runnable-" + i++));
         }
         executorService.shutdown();
         try {

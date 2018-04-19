@@ -8,10 +8,30 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ResultSaver {
+    private static String resultPath;
+    private static String output;
+    private static ResultSaver instance = new ResultSaver(resultPath);
 
-    public static synchronized void saveSentence(@NotNull String s, String resultPath) {
+    public ResultSaver(String resultPath) {
+        this.resultPath=resultPath;
+    }
+
+    public static ResultSaver getInstance(){
+        return instance;
+    }
+
+    public static synchronized void saveSentence(@NotNull String sentence) {
+        output+=sentence+". ";
+        if(output.length()>1000){
+            saveToFile();
+            output="";
+        }
+    }
+
+    private static void saveToFile(){
+        System.out.println("Save");
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(resultPath, true))) {
-            bufferedWriter.write(s + ". ");
+            bufferedWriter.write(output);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException o) {

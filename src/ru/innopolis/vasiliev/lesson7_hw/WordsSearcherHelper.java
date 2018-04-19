@@ -1,13 +1,20 @@
 package ru.innopolis.vasiliev.lesson7_hw;
 
 import java.io.File;
+import java.util.Scanner;
 
 public class WordsSearcherHelper {
-    private static String[] words = {"sdsdsd", "sdssd", "ewrwe", "erer","sdfwegwg","f4334gf4g","Fdbre","dglhfm","fehhh","m,nmnpmrt","bkdlkgnmlke","gadg.fg","FKJKLFSLFDKJ","#F3fef;l"};
+    private static String[] words = {"valentin", "anzn", "klvuboueh", "erer","mjeah","fsxzqtd","Fdbre","dglhfm","mmldpw","kvnvvsdvsd","bkdlkgnmlke","gadg.fg","FKJKLFSLFDKJ","#F3fef;l","vjdcrxlvn","gfmgyo","pffafsfa","Uypyr","oooqcvyqm","vkywcwzvy"};
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter to start");
+        scanner.nextLine();
         WordsSearcher wordsSearcher = new WordsSearcher();
         wordsSearcher.getOccurrences(getSourcesPaths(ResGenerator.OUTPUT_PATH), words, ResGenerator.OUTPUT_PATH + "out.txt");
+        //String[] src = {"ftp://service.confident.spb.ru/_clients/Dallas/Full/imageDL80v195.exe"};
+        //wordsSearcher.getOccurrences(src, words, ResGenerator.OUTPUT_PATH + "out.txt");
+
     }
 
     static String[] getSourcesPaths(String path) {

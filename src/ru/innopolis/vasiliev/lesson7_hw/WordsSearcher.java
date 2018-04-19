@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 class WordsSearcher {
 
@@ -14,12 +15,19 @@ class WordsSearcher {
             return;
         }
         int i = 0;
+        long startTime=System.currentTimeMillis();
         ExecutorService executorService = Executors.newFixedThreadPool(10);
         deletePreviousResult(res);
         for (String source : sources) {
             executorService.submit(new SearchRunnable(source, words, res, "runnable-" + i++));
         }
         executorService.shutdown();
+        try {
+            executorService.awaitTermination(1,TimeUnit.HOURS);
+            System.out.println("Elapsed time: "+(System.currentTimeMillis()-startTime));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     private void deletePreviousResult(String res) {

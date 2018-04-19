@@ -17,7 +17,9 @@ class ResGenerator {
 
     public static void main(String[] args) {
         initArgs();
+        System.out.println("please wait...");
         generateFiles();
+        System.out.println("done!");
     }
 
     private static void initArgs() {
@@ -78,6 +80,7 @@ class ResGenerator {
             } catch (IOException o) {
                 o.printStackTrace();
             }
+            System.out.println("file_"+i+" created");
         }
     }
 

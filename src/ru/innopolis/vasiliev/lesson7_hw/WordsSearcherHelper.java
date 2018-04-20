@@ -12,8 +12,6 @@ public class WordsSearcherHelper {
         scanner.nextLine();
         WordsSearcher wordsSearcher = new WordsSearcher();
         wordsSearcher.getOccurrences(getSourcesPaths(ResGenerator.OUTPUT_PATH), words, ResGenerator.OUTPUT_PATH + "out.txt");
-        //String[] src = {"ftp://service.confident.spb.ru/_clients/Dallas/Full/imageDL80v195.exe"};
-        //wordsSearcher.getOccurrences(src, words, ResGenerator.OUTPUT_PATH + "out.txt");
 
     }
 

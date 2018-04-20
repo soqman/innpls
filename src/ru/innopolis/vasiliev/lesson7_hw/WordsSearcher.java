@@ -8,6 +8,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 class WordsSearcher {
+    private final int THREADS_COUNT_IN_POOL=10;
 
     public void getOccurrences(String[] sources, String[] words, String res) {
         if (sources.length == 0 || words.length == 0 || res.equals("")) {
@@ -16,7 +17,7 @@ class WordsSearcher {
         }
         int i = 0;
         long startTime=System.currentTimeMillis();
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
+        ExecutorService executorService = Executors.newFixedThreadPool(THREADS_COUNT_IN_POOL);
         deletePreviousResult(res);
         ResultSaver resultSaver = new ResultSaver(res);
         for (String source : sources) {

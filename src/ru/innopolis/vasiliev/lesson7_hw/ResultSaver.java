@@ -11,6 +11,7 @@ public class ResultSaver {
     private static String resultPath;
     private static String output;
     private static ResultSaver instance = new ResultSaver(resultPath);
+    private static final int THRESHOLD=10_000;
 
     public ResultSaver(String resultPath) {
         this.resultPath=resultPath;
@@ -22,7 +23,7 @@ public class ResultSaver {
 
     public static synchronized void saveSentence(@NotNull String sentence) {
         output+=sentence+". ";
-        if(output.length()>1000){
+        if(output.length()>THRESHOLD){
             saveToFile();
             output="";
         }

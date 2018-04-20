@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.Scanner;
 
 public class WordsSearcherHelper {
-    private static String[] words = {"sdfssd", "fef", "sdf", "shh","bbv","sdf","gh","sdfsfsdf","mn","fgh","fgh","gadg.fg","FKJKLFSLFDKJ","#F3fef;l","vjdcrxlvn","gfmgyo","pffafsfa","Uypyr","oooqcvyqm","vkywcwzvy"};
+    private static String[] words = {"sd","gfg","fg","fgf","kyk","nm","fhfgh","dghj"};
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);

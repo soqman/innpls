@@ -8,11 +8,15 @@ class SearchRunnable implements Runnable {
     private final String src;
     private final String[] words;
     private final String name;
+    private final long startByte;
+    private long bytesLength;
 
-    SearchRunnable(String src, String[] words,String name) {
+    SearchRunnable(String src, String[] words,String name, long startByte, long bytesLength){
         this.src = src;
         this.words = words;
         this.name = name;
+        this.startByte=startByte;
+        this.bytesLength=bytesLength;
     }
 
     @Override
@@ -23,6 +27,7 @@ class SearchRunnable implements Runnable {
     @Override
     public void run() {
         System.out.println("\""+name + "\" in \"" + Thread.currentThread().getName()+"\" started");
+        System.out.println("startByte "+startByte);
         if(src.startsWith("ftp")){
             searchFTP();
         }
@@ -47,7 +52,7 @@ class SearchRunnable implements Runnable {
     }
 
     private void searchFTP(){
-        //пара пара пам! фшть!
+        System.out.println("not yet");
     }
 
     private void searchWithBufferedReader() {
@@ -55,11 +60,13 @@ class SearchRunnable implements Runnable {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             int s;
             String sentence = "";
-            while ((s = br.read()) != -1) {
+            br.skip(startByte);
+            while ((s = br.read()) != -1 && bytesLength-->0) {
+                //sentence divide!!!
                 if ((char) s != '.') {
                     sentence += (char) s;
                 } else {
-                    wordsTest(sentence);
+                    wordsTest(sentence.trim());
                     sentence = "";
                 }
             }
@@ -78,7 +85,7 @@ class SearchRunnable implements Runnable {
                 ) {
             if (isWordInSentence(sentence, word)) {
                 System.out.println("word \"" +word+"\" found!");
-                ResultSaver.getInstance().saveSentence(sentence);
+                ResultSaver.saveSentence(sentence);
             }
         }
     }

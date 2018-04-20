@@ -6,20 +6,10 @@ import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
-public class ResultSaver {
+class ResultSaver {
     private static String resultPath;
-    private static String output;
-    private static ResultSaver instance = new ResultSaver(resultPath);
+    private static String output="";
     private static final int THRESHOLD=10_000;
-
-    public ResultSaver(String resultPath) {
-        this.resultPath=resultPath;
-    }
-
-    public static ResultSaver getInstance(){
-        return instance;
-    }
 
     public static synchronized void saveSentence(@NotNull String sentence) {
         output+=sentence+". ";
@@ -27,6 +17,10 @@ public class ResultSaver {
             saveToFile();
             output="";
         }
+    }
+
+    public static void initResultPath(String _resultPath){
+        resultPath=_resultPath;
     }
 
     private static void saveToFile(){
@@ -38,5 +32,9 @@ public class ResultSaver {
         } catch (IOException o) {
             o.printStackTrace();
         }
+    }
+
+    public static void saveImmediately(){
+        if(!output.isEmpty()) saveToFile();
     }
 }

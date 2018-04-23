@@ -1,5 +1,8 @@
 package ru.innopolis.vasiliev.lesson7_hw;
 
+import ru.innopolis.vasiliev.lesson7_hw.loggers.LogErrorExc;
+import ru.innopolis.vasiliev.lesson7_hw.loggers.LogInfo;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -15,31 +18,32 @@ class ResGenerator {
     static final String SOURCES_FILEEXT = ".txt";
     static final String OUTPUT_PATH = "D://J//res/";
 
+
     public static void main(String[] args) {
         initArgs();
-        System.out.println("please wait...");
+        LogInfo.logger.info("please wait...");
         generateFiles();
-        System.out.println("done!");
+        LogInfo.logger.info("done!");
     }
 
     private static void initArgs() {
         if (!Files.exists(Paths.get(OUTPUT_PATH))) {
-            System.out.println("hard-coded output file path is not exist");
+            LogInfo.logger.error("hard-coded output file path is not exist");
             System.exit(0);
         }
         Predicate<String> digitPredicate = (s) -> s.matches("[0-9]+");
         Scanner scanner = new Scanner(System.in);
-        System.out.println("input files size");
+        LogInfo.logger.info("input files size");
         String input = scanner.nextLine();
         while (!digitPredicate.test(input) || Long.parseLong(input) < 3) {
-            System.out.println("not correct");
+            LogErrorExc.logger.error("not correct");
             input = scanner.nextLine();
         }
         filessize = Long.parseLong(input);
-        System.out.println("input files count");
+        LogInfo.logger.info("input files count");
         input = scanner.nextLine();
         while (!digitPredicate.test(input) || Integer.parseInt(input) < 1) {
-            System.out.println("not correct");
+            LogErrorExc.logger.error("not correct");
             input = scanner.nextLine();
         }
         count = Integer.parseInt(input);
@@ -76,11 +80,11 @@ class ResGenerator {
                     size--;
                 }
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                LogErrorExc.logger.error(e.getMessage());
             } catch (IOException o) {
-                o.printStackTrace();
+                LogErrorExc.logger.error(o.getMessage());
             }
-            System.out.println("file_"+i+" created");
+            LogInfo.logger.info("file_"+i+" created");
         }
     }
 

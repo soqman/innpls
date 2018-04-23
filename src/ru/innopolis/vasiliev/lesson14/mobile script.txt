@@ -1,0 +1,62 @@
+-- we don't know how to generate database mobile_phones (class Database) :(
+create table manufacturer
+(
+  id       serial       not null
+    constraint manufacturer_pkey
+    primary key,
+  name     varchar(200) not null,
+  country  varchar(50),
+  warranty integer
+);
+
+create table category
+(
+  id   serial  not null
+    constraint category_pkey
+    primary key,
+  name varchar not null
+);
+
+create table users
+(
+  id       serial      not null
+    constraint users_pkey
+    primary key,
+  name     varchar(50) not null,
+  password varchar(50) not null
+);
+
+create table items
+(
+  id              serial       not null
+    constraint items_pkey
+    primary key,
+  name            varchar(250) not null,
+  category_id     integer      not null
+    constraint category_id
+    references category
+    on update cascade on delete cascade,
+  manufacturer_id integer
+    constraint manufacturer
+    references manufacturer
+    on update cascade on delete set null,
+  price           double precision,
+  description     text,
+  image           varchar(100)
+);
+
+create table orders
+(
+  id        serial       not null
+    constraint orders_pkey
+    primary key,
+  item      integer      not null
+    constraint item
+    references items
+    on update cascade on delete restrict,
+  fio       varchar(200) not null,
+  address   varchar(200),
+  phone     varchar(20)  not null,
+  processed integer
+);
+

@@ -1,6 +1,7 @@
 package ru.innopolis.vasiliev.lesson7_hw;
 
 import com.sun.istack.internal.NotNull;
+import ru.innopolis.vasiliev.lesson7_hw.loggers.LogInfo;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -24,7 +25,7 @@ class ResultSaver {
     }
 
     private static void saveToFile(){
-        System.out.println("Save");
+        LogInfo.logger.info("Save");
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(resultPath, true))) {
             bufferedWriter.write(output);
         } catch (FileNotFoundException e) {

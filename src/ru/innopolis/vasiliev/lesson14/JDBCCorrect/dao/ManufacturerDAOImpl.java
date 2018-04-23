@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class ManufacturerDAOImpl implements ManufacturerDAO {
     private static ConnectionManager connectionManager = ConnectionManagerJDBCImpl.getInstance();
     @Override
-    public boolean addManunfacturer(Manufacturer manufacturer) {
+    public boolean addManufacturer(Manufacturer manufacturer) {
         return false;
     }
 

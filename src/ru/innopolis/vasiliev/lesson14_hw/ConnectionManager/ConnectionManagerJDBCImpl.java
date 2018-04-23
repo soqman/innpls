@@ -1,10 +1,10 @@
-package ru.innopolis.vasiliev.lesson14.JDBCCorrect.ConnectionManager;
+package ru.innopolis.vasiliev.lesson14_hw.ConnectionManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectionManagerJDBCImpl implements ConnectionManager{
+public class ConnectionManagerJDBCImpl implements ConnectionManager {
     private static ConnectionManager connectionManager;
 
     public static ConnectionManager getInstance(){

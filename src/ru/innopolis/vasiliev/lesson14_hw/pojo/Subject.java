@@ -1,12 +1,15 @@
-package ru.innopolis.vasiliev.lesson14_hw.ConnectionManager.pojo;
-
-import java.util.HashSet;
+package ru.innopolis.vasiliev.lesson14_hw.pojo;
 
 public class Subject{
 private int subject_id;
 private String name;
 private int teacher_id;
-private HashSet<Student> students;
+
+    public Subject(int subject_id, String name, int teacher_id) {
+        this.subject_id = subject_id;
+        this.name = name;
+        this.teacher_id = teacher_id;
+    }
 
     public int getSubject_id() {
         return subject_id;
@@ -30,20 +33,5 @@ private HashSet<Student> students;
 
     public void setTeacher_id(int teacher_id) {
         this.teacher_id = teacher_id;
-    }
-
-    public HashSet<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(HashSet<Student> students) {
-        this.students = students;
-    }
-
-    public void addStudents(Student student){
-        students.add(student);
-    }
-    public void deleteStudent(Student student){
-        students.remove(student);
     }
 }

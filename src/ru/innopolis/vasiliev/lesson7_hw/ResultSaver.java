@@ -1,7 +1,7 @@
 package ru.innopolis.vasiliev.lesson7_hw;
 
 import com.sun.istack.internal.NotNull;
-import ru.innopolis.vasiliev.lesson7_hw.loggers.LogInfo;
+import org.apache.log4j.Logger;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -11,6 +11,8 @@ class ResultSaver {
     private static String resultPath;
     private static String output="";
     private static final int THRESHOLD=10_000;
+    public final static Logger logger=Logger.getLogger(ResultSaver.class);
+    public final static Logger errorsEX=Logger.getLogger("errorsEX");
 
     public static synchronized void saveSentence(@NotNull String sentence) {
         output+=sentence+". ";
@@ -25,13 +27,13 @@ class ResultSaver {
     }
 
     private static void saveToFile(){
-        LogInfo.logger.info("Save");
+        logger.info("Save");
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(resultPath, true))) {
             bufferedWriter.write(output);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            errorsEX.error(e.getMessage());
         } catch (IOException o) {
-            o.printStackTrace();
+            errorsEX.error(o.getMessage());
         }
     }
 

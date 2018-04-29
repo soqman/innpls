@@ -1,5 +1,7 @@
 package ru.innopolis.vasiliev.lesson7_hw;
 
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -10,6 +12,8 @@ class SearchRunnable implements Runnable {
     private final String name;
     private final long startByte;
     private long bytesLength;
+    public final static Logger logger=Logger.getLogger(SearchRunnable.class);
+    public final static Logger errorsEX=Logger.getLogger("errorsEX");
 
     SearchRunnable(String src, String[] words,String name, long startByte, long bytesLength){
         this.src = src;
@@ -26,8 +30,7 @@ class SearchRunnable implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("\""+name + "\" in \"" + Thread.currentThread().getName()+"\" started");
-        System.out.println("startByte "+startByte);
+        logger.info("\""+name + "\" in \"" + Thread.currentThread().getName()+"\" started");
         if(src.startsWith("ftp")){
             searchFTP();
         }
@@ -47,12 +50,12 @@ class SearchRunnable implements Runnable {
                 wordsTest(result);
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            errorsEX.error(e.getMessage());
         }
     }
 
     private void searchFTP(){
-        System.out.println("not yet");
+        logger.warn("not yet");
     }
 
     private void searchWithBufferedReader() {
@@ -74,9 +77,9 @@ class SearchRunnable implements Runnable {
                 wordsTest(sentence);
             }
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            errorsEX.error(e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            errorsEX.error(e.getMessage());
         }
     }
 
@@ -84,7 +87,7 @@ class SearchRunnable implements Runnable {
         for (String word : words
                 ) {
             if (isWordInSentence(sentence, word)) {
-                System.out.println("word \"" +word+"\" found!");
+                logger.info("word \"" +word+"\" found!");
                 ResultSaver.saveSentence(sentence);
             }
         }

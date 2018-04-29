@@ -1,7 +1,6 @@
 package ru.innopolis.vasiliev.lesson7_hw;
 
-import ru.innopolis.vasiliev.lesson7_hw.loggers.LogErrorExc;
-import ru.innopolis.vasiliev.lesson7_hw.loggers.LogInfo;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -17,33 +16,35 @@ class ResGenerator {
     static final int WORD_MAX_LENGTH = 12;
     static final String SOURCES_FILEEXT = ".txt";
     static final String OUTPUT_PATH = "D://J//res/";
+    public final static Logger logger=Logger.getLogger(ResGenerator.class);
+    public final static Logger errorsEX=Logger.getLogger("errorsEX");
 
 
     public static void main(String[] args) {
         initArgs();
-        LogInfo.logger.info("please wait...");
+        logger.info("please wait...");
         generateFiles();
-        LogInfo.logger.info("done!");
+        logger.info("done!");
     }
 
     private static void initArgs() {
         if (!Files.exists(Paths.get(OUTPUT_PATH))) {
-            LogInfo.logger.error("hard-coded output file path is not exist");
+            logger.error("hard-coded output file path is not exist");
             System.exit(0);
         }
         Predicate<String> digitPredicate = (s) -> s.matches("[0-9]+");
         Scanner scanner = new Scanner(System.in);
-        LogInfo.logger.info("input files size");
+        logger.info("input files size");
         String input = scanner.nextLine();
         while (!digitPredicate.test(input) || Long.parseLong(input) < 3) {
-            LogErrorExc.logger.error("not correct");
+            logger.error("not correct");
             input = scanner.nextLine();
         }
         filessize = Long.parseLong(input);
-        LogInfo.logger.info("input files count");
+        logger.info("input files count");
         input = scanner.nextLine();
         while (!digitPredicate.test(input) || Integer.parseInt(input) < 1) {
-            LogErrorExc.logger.error("not correct");
+            logger.error("not correct");
             input = scanner.nextLine();
         }
         count = Integer.parseInt(input);
@@ -80,11 +81,11 @@ class ResGenerator {
                     size--;
                 }
             } catch (FileNotFoundException e) {
-                LogErrorExc.logger.error(e.getMessage());
+                errorsEX.error(e.getMessage());
             } catch (IOException o) {
-                LogErrorExc.logger.error(o.getMessage());
+                errorsEX.error(o.getMessage());
             }
-            LogInfo.logger.info("file_"+i+" created");
+            logger.info("file_"+i+" created");
         }
     }
 

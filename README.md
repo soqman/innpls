@@ -1,2 +1,2 @@
 # innpls
-JavaEE cources projects
+JavaEE cource projects
